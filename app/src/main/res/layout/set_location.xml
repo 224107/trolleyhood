@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/c3">
+
+    <EditText
+        android:id="@+id/editTextStreet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="center|start"
+        android:hint="@string/street"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toEndOf="@+id/textViewStreet"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSetLocation" />
+
+    <EditText
+        android:id="@+id/editTextBuildingNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="center|start"
+        android:hint="@string/no"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewBuilding"
+        app:layout_constraintTop_toBottomOf="@+id/editTextStreet" />
+
+    <EditText
+        android:id="@+id/editTextApartmentNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="center|start"
+        android:hint="@string/no"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewApartment"
+        app:layout_constraintTop_toBottomOf="@+id/editTextBuildingNo" />
+
+    <EditText
+        android:id="@+id/editTextCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="center|start"
+        android:hint="@string/city"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewApartment"
+        app:layout_constraintTop_toBottomOf="@+id/editTextApartmentNo" />
+
+    <Button
+        android:id="@+id/buttonConfirmLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/white"
+        android:text="@string/confirm_location"
+        android:textColor="@color/c2"
+        android:textSize="16sp"
+        app:cornerRadius="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="@color/c2"
+        app:strokeWidth="3dp" />
+
+    <Button
+        android:id="@+id/buttonSearchAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/white"
+        android:text="@string/search_address"
+        android:textColor="@color/c2"
+        android:textSize="16sp"
+        app:cornerRadius="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCity"
+        app:strokeColor="@color/c2"
+        app:strokeWidth="3dp" />
+
+    <TextView
+        android:id="@+id/textViewSetLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/set_location"
+        android:textColor="@color/c2"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewSetMarker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/set_marker"
+        android:textColor="@color/c2"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSearchAddress" />
+
+    <TextView
+        android:id="@+id/textViewStreet"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/street_"
+        android:textAlignment="textEnd"
+        android:textColor="@color/c2"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/editTextStreet"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editTextStreet" />
+
+    <TextView
+        android:id="@+id/textViewBuilding"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/building"
+        android:textAlignment="textEnd"
+        android:textColor="@color/c2"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/editTextBuildingNo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editTextBuildingNo" />
+
+    <TextView
+        android:id="@+id/textViewApartment"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/apartment"
+        android:textAlignment="textEnd"
+        android:textColor="@color/c2"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/editTextApartmentNo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editTextApartmentNo" />
+
+    <TextView
+        android:id="@+id/textViewCity"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/city_"
+        android:textAlignment="textEnd"
+        android:textColor="@color/c2"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/editTextApartmentNo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editTextCity" />
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="3dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonConfirmLocation"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSetMarker"
+        tools:context=".SetLocation" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

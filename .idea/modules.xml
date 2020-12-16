@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/trolleyhood.iml" filepath="$PROJECT_DIR$/.idea/modules/trolleyhood.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/trolleyhood.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/trolleyhood.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/TrolleyHood.iml" filepath="$PROJECT_DIR$/.idea/modules/TrolleyHood.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/TrolleyHood.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/TrolleyHood.app.iml" />
     </modules>
   </component>
 </project>

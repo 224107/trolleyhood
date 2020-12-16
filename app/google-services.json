@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "358561063701",
+    "project_id": "trolleyhood-b6158",
+    "storage_bucket": "trolleyhood-b6158.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:358561063701:android:071f3c30ee058b47803f1c",
+        "android_client_info": {
+          "package_name": "com.example.trolleyhood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "358561063701-nnrlign3banh8nj2shb6r2nt28kf90b3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNXXEmKqwFXvm8XY0nAW3oSPhCK_dbVjM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "358561063701-nnrlign3banh8nj2shb6r2nt28kf90b3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
