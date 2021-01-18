@@ -31,6 +31,7 @@
     <string name="change_phone">Change phone</string>
     <string name="log_out">Log out</string>
     <string name="prepare_sl">prepare your shopping list</string>
+    <string name="set_q">SET QUANTITY</string>
     <string name="cart">cart</string>
     <string name="meat">meat</string>
     <string name="sweet">sweet</string>
@@ -42,4 +43,13 @@
     <string name="fruits">fruits</string>
     <string name="dairy">dairy</string>
     <string name="vegetables">vegetables</string>
+    <string name="title_activity_setting_qty">SettingQty</string>
+    <string name="set">set</string>
+    <string name="order">make an order</string>
+
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
 </resources>

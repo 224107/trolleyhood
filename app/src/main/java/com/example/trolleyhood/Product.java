@@ -6,9 +6,12 @@ public class Product {
     public boolean isCountable;
 
 
+    public Product(){}
+
     public Product(ProductCategory category, String name, boolean isCountable) {
         this.category = category;
         this.name = name;
         this.isCountable = isCountable;
     }
+
 }

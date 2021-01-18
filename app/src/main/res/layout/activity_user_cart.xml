@@ -1,9 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@color/c3"
+tools:context=".UserCart">
+
+<LinearLayout
+    android:id="@+id/buttons"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:layout_alignParentBottom="true">
+    <Button
+        android:id="@+id/orderBtn"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:background="@color/white"
+        android:textColor="@color/c2"
+        android:textSize="24sp"
+        app:strokeColor="@color/c2"
+        android:text="@string/order"></Button>
+</LinearLayout>
+    <LinearLayout
+        android:id="@+id/uppertitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/category"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:text="@string/cart"
+            ></TextView>
+    </LinearLayout>
+
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserCart">
+    android:layout_above="@id/buttons"
+    android:layout_below="@id/uppertitle">
+   <TableLayout
+       android:id="@+id/table_layout"
+       android:layout_height="wrap_content" android:layout_width="fill_parent" >
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+   </TableLayout>
+</ScrollView>
+
+</RelativeLayout>
