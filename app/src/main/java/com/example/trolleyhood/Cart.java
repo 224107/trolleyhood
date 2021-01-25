@@ -7,21 +7,21 @@ import java.util.List;
 
 public class Cart extends Application {
 
-    public List<CartPosition> cart = new ArrayList<>();
+    public List<CartPosition> cartPositions = new ArrayList<>();
 
     public void addPosition(CartPosition position){
-        for(CartPosition cp : cart){
+        for(CartPosition cp : cartPositions){
             if(cp.product.name.equals(position.product.name)){
                 cp.quantity = cp.quantity + position.quantity;
                 return;
             }
         }
-        cart.add(position);
+        cartPositions.add(position);
     }
     public void deletePosition(String name){
-        for(CartPosition cp : cart){
+        for(CartPosition cp : cartPositions){
             if(cp.product.name.equals(name)){
-                cart.remove(cp);
+                cartPositions.remove(cp);
                 return;
             }
         }

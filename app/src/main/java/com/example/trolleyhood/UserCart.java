@@ -1,5 +1,6 @@
 package com.example.trolleyhood;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -16,10 +17,17 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class UserCart extends AppCompatActivity implements View.OnClickListener {
 
     Cart cart;
     Button order;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +35,7 @@ public class UserCart extends AppCompatActivity implements View.OnClickListener 
         cart = (Cart) getApplicationContext();
         order = (Button) findViewById(R.id.orderBtn);
         order.setOnClickListener(this::onClick);
-        for(CartPosition position : cart.cart){
+        for(CartPosition position : cart.cartPositions){
           addPosition(position.product.name , position.quantity);
         }
     }
@@ -82,9 +90,11 @@ public class UserCart extends AppCompatActivity implements View.OnClickListener 
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.orderBtn :
-                if(!cart.cart.isEmpty()) {
+                if(!cart.cartPositions.isEmpty()) {
                     order.setEnabled(true);
-                    order.setText("order made");
+                    order.setText("Order made");
+                    addOrderToDatabase();
+                    Toast.makeText(UserCart.this, "Order submitted", Toast.LENGTH_LONG).show();
                 }
                 break;
             default:
@@ -94,5 +104,15 @@ public class UserCart extends AppCompatActivity implements View.OnClickListener 
                 overridePendingTransition(0, 0);
                 startActivity(getIntent());
                 overridePendingTransition(0, 0);        }
+    }
+
+    private void addOrderToDatabase() {
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference("Orders")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child("Cart");
+
+        for(CartPosition cp : cart.cartPositions){
+            db.push().setValue(cp);
+        }
     }
 }

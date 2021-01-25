@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -16,6 +18,10 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
 import java.util.List;
@@ -28,6 +34,8 @@ public class SetLocation extends FragmentActivity implements OnMapReadyCallback,
     private EditText editTextStreet, editTextBuildingNo, editTextApartmentNo, editTextCity;
     private String street, building, apartment, city;
     LatLng latLng;
+    private UserAddress userAddress;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +78,20 @@ public class SetLocation extends FragmentActivity implements OnMapReadyCallback,
     }
 
     private void confirmLocation() {
-        UserAddress address = new UserAddress(street, building, apartment, city, latLng);
+        userAddress = new UserAddress(street, building, apartment, city, latLng);
+
+        FirebaseDatabase.getInstance().getReference("Locations")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .setValue(userAddress).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()) {
+                    Toast.makeText(SetLocation.this, "Location saved", Toast.LENGTH_LONG).show();
+                }else {
+                    Toast.makeText(SetLocation.this, "Failed to save Location", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     private void searchAddress() {
@@ -79,7 +100,6 @@ public class SetLocation extends FragmentActivity implements OnMapReadyCallback,
         apartment= editTextApartmentNo.getText().toString().trim();
         city = editTextCity.getText().toString().trim();
         String addressName = street + ' ' + building + ", " + city;
-
 
         try {
             List<Address> addresses = geocoder.getFromLocationName(addressName, 1);
