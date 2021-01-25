@@ -31,9 +31,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62631c0f-c9c4-412e-b6cf-8ecfb3d774b9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/trolleyhood/Order.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/trolleyhood/OrdersRepo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/trolleyhood/SomeonesOrder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_someones_order.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/trolleyhood/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/trolleyhood/Cart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/trolleyhood/Help.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/trolleyhood/Help.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/help.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/help.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/trolleyhood/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/trolleyhood/Cart.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/trolleyhood/SetLocation.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/trolleyhood/SetLocation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/trolleyhood/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/trolleyhood/Settings.java" afterDir="false" />
@@ -58,8 +65,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="layoutResourceFile" />
-        <option value="Class" />
         <option value="resourceFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -88,13 +95,16 @@
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyClassDialog.RECENTS_KEY">
+    <key name="android.template.-913064705">
       <recent name="com.example.trolleyhood" />
     </key>
     <key name="android.template.309116513">
       <recent name="com.example.trolleyhood" />
     </key>
-    <key name="android.template.-913064705">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.trolleyhood" />
+    </key>
+    <key name="android.template.1222271479">
       <recent name="com.example.trolleyhood" />
     </key>
   </component>
@@ -253,24 +263,32 @@
     </state>
     <state x="922" y="267" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1611164258790" />
     <state x="1537" y="337" key="FileChooserDialogImpl/0.0.2560.1040@0.0.2560.1040" timestamp="1608161644009" />
+    <state width="1491" height="192" key="GridCell.Tab.0.bottom" timestamp="1611407776753">
     <state width="1492" height="184" key="GridCell.Tab.0.bottom" timestamp="1611172828351">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state width="1491" height="192" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1611407776753" />
     <state width="1492" height="184" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1611172828351" />
     <state width="1233" height="283" key="GridCell.Tab.0.bottom/0.0.2560.1040@0.0.2560.1040" timestamp="1608162354059" />
+    <state width="1491" height="192" key="GridCell.Tab.0.center" timestamp="1611407776752">
     <state width="1492" height="184" key="GridCell.Tab.0.center" timestamp="1611172828350">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state width="1491" height="192" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1611407776752" />
     <state width="1492" height="184" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1611172828350" />
     <state width="1233" height="283" key="GridCell.Tab.0.center/0.0.2560.1040@0.0.2560.1040" timestamp="1608162354059" />
+    <state width="1491" height="192" key="GridCell.Tab.0.left" timestamp="1611407776752">
     <state width="1492" height="184" key="GridCell.Tab.0.left" timestamp="1611172828350">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state width="1491" height="192" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1611407776752" />
     <state width="1492" height="184" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1611172828350" />
     <state width="1233" height="283" key="GridCell.Tab.0.left/0.0.2560.1040@0.0.2560.1040" timestamp="1608162354058" />
+    <state width="1491" height="192" key="GridCell.Tab.0.right" timestamp="1611407776753">
     <state width="1492" height="184" key="GridCell.Tab.0.right" timestamp="1611172828351">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state width="1491" height="192" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1611407776753" />
     <state width="1492" height="184" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1611172828351" />
     <state width="1233" height="283" key="GridCell.Tab.0.right/0.0.2560.1040@0.0.2560.1040" timestamp="1608162354059" />
     <state x="618" y="548" key="psd.add.jar.dependency.panel.dimension" timestamp="1607950524620">
