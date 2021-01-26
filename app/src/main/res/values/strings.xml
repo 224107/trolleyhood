@@ -32,7 +32,7 @@
     <string name="log_out">Log out</string>
     <string name="prepare_sl">prepare your shopping list</string>
     <string name="set_q">SET QUANTITY</string>
-    <string name="cart">cart</string>
+    <string name="cart">CART</string>
     <string name="meat">meat</string>
     <string name="sweet">sweet</string>
     <string name="bread">bread</string>
@@ -47,6 +47,8 @@
     <string name="set">set</string>
     <string name="order">make an order</string>
     <string name="takeorder">take the order</string>
+    <string name="empty"></string>
+    <string name="my_order">MY ORDER</string>
 
     <!--
     This string is used for square devices and overridden by hello_world in

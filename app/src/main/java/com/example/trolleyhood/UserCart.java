@@ -27,6 +27,7 @@ public class UserCart extends AppCompatActivity implements View.OnClickListener 
 
     Cart cart;
     Button order;
+    TextView category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +35,13 @@ public class UserCart extends AppCompatActivity implements View.OnClickListener 
         setContentView(R.layout.activity_user_cart);
         cart = (Cart) getApplicationContext();
         order = (Button) findViewById(R.id.orderBtn);
+        order.setBackgroundResource(R.drawable.my_button_bg);
         order.setOnClickListener(this::onClick);
         for(CartPosition position : cart.cartPositions){
           addPosition(position.product.name , position.quantity);
         }
+        category = (TextView) findViewById(R.id.category);
+        category.setBackgroundResource(R.drawable.cart_button);
     }
     public void addPosition(String productName,double qty){
         TextView position = new TextView(this);
@@ -62,10 +66,11 @@ public class UserCart extends AppCompatActivity implements View.OnClickListener 
         tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
 
         TableRow.LayoutParams params = new TableRow.LayoutParams(
-                500 , 250);
+                520 , 200);
         params.setMargins(10, 20, 10, 0);
+        params.setMarginStart(65);
         TableRow.LayoutParams params2 = new TableRow.LayoutParams(
-                250 , 250);
+                200 , 200);
         params2.setMargins(10, 20, 10, 0);
         position.setLayoutParams(params);
         qtyText.setLayoutParams(params2);
@@ -75,15 +80,6 @@ public class UserCart extends AppCompatActivity implements View.OnClickListener 
         tr.addView(delete);
         ll.addView(tr, new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
 
-      /*  TableLayout tl = (TableLayout) findViewById(R.id.table_layout);
-        TableRow tr = new TableRow(this);
-        tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-        Button b = new Button(this);
-        b.setText("Dynamic Button");
-        b.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-        tr.addView(b);
-
-        tl.addView(tr, new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));*/
     }
 
     @Override
@@ -95,6 +91,9 @@ public class UserCart extends AppCompatActivity implements View.OnClickListener 
                     order.setText("Order made");
                     addOrderToDatabase();
                     Toast.makeText(UserCart.this, "Order submitted", Toast.LENGTH_LONG).show();
+                    Intent i = new Intent(getApplicationContext(), HelpOrAsk.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(i);
                 }
                 break;
             default:
@@ -110,9 +109,11 @@ public class UserCart extends AppCompatActivity implements View.OnClickListener 
         DatabaseReference db = FirebaseDatabase.getInstance().getReference("Orders")
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .child("Cart");
+        Integer i = 0;
 
         for(CartPosition cp : cart.cartPositions){
-            db.push().setValue(cp);
+            db.child("product" + i.toString()).setValue(cp);
+            i++;
         }
     }
 }

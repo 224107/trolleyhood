@@ -3,6 +3,7 @@ package com.example.trolleyhood;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,7 @@ public class CategorySelection extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_category_selection);
         Button cartBtn = (Button) findViewById(R.id.cartBtn);
         cartBtn.setOnClickListener(this);
+        cartBtn.setBackgroundResource(R.drawable.cart_button);
         ImageView meatBtn = (ImageView) findViewById(R.id.meatBtn);
         meatBtn.setOnClickListener(this);
         ImageView sweetBtn = (ImageView) findViewById(R.id.sweetBtn);

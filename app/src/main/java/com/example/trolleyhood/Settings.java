@@ -14,13 +14,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
     public class Settings extends AppCompatActivity implements View.OnClickListener{
     Button buttonChangeName, buttonChangeAddress, buttonChangePhone, buttonLogOut;
     TextView textName, textStreet, textNumber;
     EditText editTextName, editTextNumber;
     boolean isButtonChangeNameOn = false, isButtonChangePhoneOn = false;
+    private FirebaseAuth mAuth;
+    private  FirebaseDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +37,7 @@ import com.google.firebase.database.FirebaseDatabase;
         textStreet = (TextView) findViewById(R.id.textViewStreet);
 
         editTextName = (EditText) findViewById(R.id.editTextName);
+        editTextNumber = (EditText) findViewById(R.id.editTextPhone);
 
         buttonChangeName = (Button) findViewById(R.id.buttonChangeName);
         buttonChangeAddress = (Button) findViewById(R.id.buttonChangeAddress);
@@ -42,6 +48,34 @@ import com.google.firebase.database.FirebaseDatabase;
         buttonChangeAddress.setOnClickListener(this);
         buttonChangePhone.setOnClickListener(this);
         buttonLogOut.setOnClickListener(this);
+
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseDatabase.getInstance();
+        db.getReference("Users").child(mAuth.getCurrentUser().getUid())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        textName.setText(snapshot.child("name").getValue().toString());
+                        textNumber.setText(snapshot.child("phone").getValue().toString());
+                    }
+                    @Override
+                    public void onCancelled (@NonNull DatabaseError error){
+                    }
+                });
+        db.getReference("Locations").child(mAuth.getCurrentUser().getUid())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String street = snapshot.child("street").getValue().toString();
+                        String buildingNumber = snapshot.child("buildingNo").getValue().toString();
+                        String apartmentNumber = snapshot.child("apartmentNo").getValue().toString();
+                        String city = snapshot.child("city").getValue().toString();
+                        textStreet.setText(street + ' ' + buildingNumber + '/' + apartmentNumber + ", " + city);
+                    }
+                    @Override
+                    public void onCancelled (@NonNull DatabaseError error){
+                    }
+                });
 
     }
 
@@ -64,7 +98,7 @@ import com.google.firebase.database.FirebaseDatabase;
     }
 
     private void logOut() {
-        FirebaseAuth.getInstance().signOut();
+        mAuth.signOut();
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
     }
 
@@ -73,12 +107,46 @@ import com.google.firebase.database.FirebaseDatabase;
     }
     
     private void changePhone() {
-        throw new UnsupportedOperationException();
+        String phone;
+
+        if( !isButtonChangePhoneOn){
+            textNumber.setVisibility(View.GONE);
+            editTextNumber.setVisibility(View.VISIBLE);
+            buttonChangePhone.setText("save phone");
+            isButtonChangePhoneOn = true;
+        } else if ( isButtonChangePhoneOn){
+            phone = editTextNumber.getText().toString().trim();
+            if (phone.isEmpty()){
+                editTextNumber.setError("Phone is required");
+                editTextNumber.requestFocus();
+                return;
+            }
+            textNumber.setText(phone);
+            changePhoneInDb(phone);
+            textNumber.setVisibility(View.VISIBLE);
+            editTextNumber.setVisibility(View.GONE);
+            buttonChangePhone.setText("change phone");
+            isButtonChangePhoneOn = false;
+        }
     }
 
+        private void changePhoneInDb(String phone) {
+            db.getReference("Users")
+                    .child(mAuth.getCurrentUser().getUid()).child("phone")
+                    .setValue(phone).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful()) {
+                        Toast.makeText(Settings.this, "Phone number saved", Toast.LENGTH_LONG).show();
+                    }else {
+                        Toast.makeText(Settings.this, "Failed to save Phone number", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+        }
 
 
-    private void changeName() {
+        private void changeName() {
         String name;
 
         if( !isButtonChangeNameOn){
@@ -103,8 +171,8 @@ import com.google.firebase.database.FirebaseDatabase;
     }
 
     private void changeNameInDb( String name) {
-        FirebaseDatabase.getInstance().getReference("Users")
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("name")
+        db.getReference("Users")
+                .child(mAuth.getCurrentUser().getUid()).child("name")
                 .setValue(name).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

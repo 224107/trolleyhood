@@ -20,10 +20,10 @@ public class ProductsSelection extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_products_selection);
         Button cartBtn = (Button) findViewById(R.id.cartBtn);
         cartBtn.setOnClickListener(this);
+        cartBtn.setBackgroundResource(R.drawable.cart_button);
         ProductList list = new ProductList();
         String passedCategory = getIntent().getStringExtra("category");
-        TextView category = (TextView) findViewById(R.id.category);
-        category.setText(passedCategory);
+
         for(Product product : list.allProducts){
             if(passedCategory.equals(product.category.name()))
                 addButton(product.name);
@@ -42,7 +42,9 @@ public class ProductsSelection extends AppCompatActivity implements View.OnClick
         LinearLayout ll = (LinearLayout)findViewById(R.id.linear_layout);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, 250);
-        params.setMargins(10, 20, 10, 0);
+        params.setMargins(20, 40, 20, 0);
+        params.setMarginStart(65);
+        params.setMarginEnd(65);
         myButton.setLayoutParams(params);
         ll.addView(myButton);
     }

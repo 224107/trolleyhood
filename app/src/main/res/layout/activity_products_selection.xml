@@ -13,25 +13,18 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/category"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:textSize="24sp"
-            ></TextView>
-
         <Button
             android:id="@+id/cartBtn"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
+            android:layout_width="360dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="16dp"
             android:background="@color/white"
-            android:textColor="@color/c2"
-            android:textSize="24sp"
-            app:strokeColor="@color/c2"
-            android:text="@string/cart"></Button>
+            android:gravity="center"
+            android:text="@string/cart"
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            android:translationX="26dp"
+            app:strokeColor="@color/c2"></Button>
 
     </LinearLayout>
 </ScrollView>

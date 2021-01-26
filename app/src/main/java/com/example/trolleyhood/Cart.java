@@ -9,7 +9,7 @@ public class Cart extends Application {
 
     //all data used across application should be in this class
     //cart of the user, and orders of others
-    public List<CartPosition> cart = new ArrayList<>();
+    public List<CartPosition> cartPositions = new ArrayList<>();
     public OrdersRepo ordersRepo = new OrdersRepo();
 
     public void addPosition(CartPosition position){
@@ -30,6 +30,6 @@ public class Cart extends Application {
         }
     }
     public List<CartPosition> giveAll(){
-        return cart;
+        return cartPositions;
     }
 }
