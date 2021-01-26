@@ -11,13 +11,5 @@ public enum ProductCategory {
     fruits,
     dairy,
     vegetables;
+};
 
-    public String toString(){
-        switch(this){
-            case fruits :
-                return "fruits";
-        }
-        return null;
-    }
-
-    }

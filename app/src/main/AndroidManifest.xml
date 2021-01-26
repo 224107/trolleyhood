@@ -30,14 +30,14 @@
             android:value="@string/google_maps_key" />
 
         <activity android:name=".MainActivity">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".SignIn" />
         <activity android:name=".CreateAccount" />
-        <activity android:name=".HelpOrAsk"><intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+        <activity android:name=".HelpOrAsk">
         </activity>
         <activity android:name=".SetLocation" />
         <activity android:name=".Help" />

@@ -3,6 +3,7 @@ package com.example.trolleyhood;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -12,23 +13,85 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Help extends AppCompatActivity implements View.OnClickListener {
 
     Cart cart;
+    FirebaseAuth mAuth;
+    FirebaseDatabase db;
+    List<Order> orders;
+    List<User> users;
+    Integer i;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.help);
         cart = (Cart) getApplicationContext();
-       for(Order order : cart.ordersRepo.allOrders){
+        for(Order order : cart.ordersRepo.allOrders){
           addPosition(order.user);
-     }
+        }
+
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseDatabase.getInstance();
+        orders = new ArrayList<>();
+        users = new ArrayList<>();
+
+        DatabaseReference ref = db.getReference();
+        final String userId = mAuth.getCurrentUser().getUid();
+
+
+        ref.child("Users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot userIdDb : snapshot.getChildren()) {
+                    System.out.println(userIdDb.getKey());
+                    if(!userIdDb.getKey().equals(userId))
+                        i = 0;
+                        DataSnapshot cartDb = userIdDb.child("Offers").child("Cart");
+
+                        if(cartDb.child("isAccepted").getValue().toString().equals("false")) {
+                        String childProductId = "product" + i.toString();
+                        String name = userIdDb.child("name").getValue().toString();
+                        String email = userIdDb.child("email").getValue().toString();
+                        String phone = userIdDb.child("phone").getValue().toString();
+
+                        for(DataSnapshot product : cartDb.getChildren()){
+                            continue;
+                        }
+                        String productCategory = cartDb.child(childProductId).child("product").child("category").getValue().toString();
+                        String productIsCountable = cartDb.child(childProductId).child("product").child("isCountable").getValue().toString();
+                        String productName = cartDb.child(childProductId).child("product").child("name").getValue().toString();
+                        String productQuantity = cartDb.child(childProductId).child("Quantity").getValue().toString();
+
+                        i++;
+                        }
+                    }
+
+                }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        //db.getReference("Offers").child()
     }
 
     public void addPosition(User user){

@@ -69,7 +69,6 @@ public class SetLocation extends FragmentActivity implements OnMapReadyCallback,
         switch(v.getId()){
             case R.id.buttonConfirmLocation:
                 confirmLocation();
-                startActivity(new Intent(getApplicationContext(), HelpOrAsk.class));
                 break;
             case R.id.buttonSearchAddress:
                 searchAddress();
@@ -80,13 +79,14 @@ public class SetLocation extends FragmentActivity implements OnMapReadyCallback,
     private void confirmLocation() {
         userAddress = new UserAddress(street, building, apartment, city, latLng);
 
-        FirebaseDatabase.getInstance().getReference("Locations")
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+        FirebaseDatabase.getInstance().getReference("Users")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Location")
                 .setValue(userAddress).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()) {
                     Toast.makeText(SetLocation.this, "Location saved", Toast.LENGTH_LONG).show();
+                    finish();
                 }else {
                     Toast.makeText(SetLocation.this, "Failed to save Location", Toast.LENGTH_LONG).show();
                 }

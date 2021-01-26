@@ -81,16 +81,17 @@ public class SignIn  extends AppCompatActivity implements View.OnClickListener {
 
     private void locationCheck() {
         final String userId = mAuth.getCurrentUser().getUid();
-        FirebaseDatabase.getInstance().getReference("Locations")
+        FirebaseDatabase.getInstance().getReference("Users")
         .addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot userIdDb : snapshot.getChildren()) {
-                    System.out.println(userIdDb.getKey());
                     if (userIdDb.getKey().equals(userId)){
-                        isLocationInDb(true);
-                    } else {
-                        isLocationInDb(false);
+                        if ( userIdDb.child("Location").child("street").exists()){
+                            isLocationInDb(true);
+                        } else {
+                            isLocationInDb(false);
+                        }
                     }
                 }
             }

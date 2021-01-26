@@ -106,14 +106,14 @@ public class UserCart extends AppCompatActivity implements View.OnClickListener 
     }
 
     private void addOrderToDatabase() {
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference("Orders")
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .child("Cart");
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference("Users")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Offers");
         Integer i = 0;
 
         for(CartPosition cp : cart.cartPositions){
-            db.child("product" + i.toString()).setValue(cp);
+            db.child("Cart").child("product" + i.toString()).setValue(cp);
             i++;
         }
+        db.child("isAccepted").setValue(false);
     }
 }

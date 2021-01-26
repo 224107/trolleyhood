@@ -55,14 +55,16 @@ import com.google.firebase.database.ValueEventListener;
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        textName.setText(snapshot.child("name").getValue().toString());
-                        textNumber.setText(snapshot.child("phone").getValue().toString());
+                        String name = snapshot.child("name").getValue().toString();
+                        String phone = snapshot.child("phone").getValue().toString();
+                        textName.setText(name);
+                        textNumber.setText(phone);
                     }
                     @Override
                     public void onCancelled (@NonNull DatabaseError error){
                     }
                 });
-        db.getReference("Locations").child(mAuth.getCurrentUser().getUid())
+        db.getReference("Users").child(mAuth.getCurrentUser().getUid()).child("Location")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
