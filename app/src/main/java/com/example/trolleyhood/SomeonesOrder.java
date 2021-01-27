@@ -1,5 +1,6 @@
 package com.example.trolleyhood;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -13,33 +14,91 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class SomeonesOrder extends AppCompatActivity implements View.OnClickListener{
 
     Cart cart;
-    String userNr;
+    String userId, userName;
     Button help;
-    TextView userName;
-    List<CartPosition> list;
+    TextView userNameTextView;
+    List<CartPosition> cartPositions;
+    FirebaseAuth mAuth;
+    FirebaseDatabase db;
+    Boolean isAccepted = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_someones_order);
         cart = (Cart) getApplicationContext();
-        userNr = getIntent().getStringExtra("userNr");
+        userId = getIntent().getStringExtra("userId");
         help = findViewById(R.id.orderBtn);
-        userName = findViewById(R.id.user);
-        list = cart.ordersRepo.findCart(userNr);
-        userName.setText(cart.ordersRepo.findName(userNr) + "'s order:");
         help.setOnClickListener(this::onClick);
-        if(cart.ordersRepo.findOrder(userNr).isTaken){
-            help.setText("ALREADY TAKEN");
-            help.setEnabled(true);
-        }
-        for(CartPosition position : list){
-            addPosition(position.product.name,position.quantity);
-        }
+        userNameTextView = findViewById(R.id.user);
+        cartPositions = new ArrayList<>();
+
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseDatabase.getInstance();
+
+
+        DatabaseReference ref = db.getReference();
+
+        System.out.println(userId);
+        ref.child("Users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot userIdDb : snapshot.getChildren()) {
+                    if (userIdDb.getKey().equals(userId)) {
+                        DataSnapshot cartDb = userIdDb.child("Offers").child("Cart");
+
+                        //isAccepted = false;
+                        isAccepted = Boolean.parseBoolean(userIdDb.child("Offers").child("isAccepted").getValue().toString());
+                        //User
+                        userName = userIdDb.child("name").getValue().toString();
+                        System.out.println(userName);
+                        //Order
+                        for (DataSnapshot productId : cartDb.getChildren()) {
+                            String productCategory = productId.child("product").child("category").getValue().toString();
+                            Boolean productIsCountable = Boolean.parseBoolean(productId.child("product").child("isCountable").getValue().toString()) ;
+                            String productName = productId.child("product").child("name").getValue().toString();
+
+                            Double productQuantity = Double.parseDouble(productId.child("quantity").getValue().toString());
+                            System.out.println(productCategory);
+                            System.out.println(productName);
+                            System.out.println(productQuantity);
+                            System.out.println(productIsCountable);
+                            Product product = new Product(ProductCategory.parseCategory(productCategory), productName, productIsCountable);
+                            CartPosition cartPosition = new CartPosition(product, productQuantity);
+                            cartPositions.add(cartPosition);
+
+                        }
+                    }
+                }
+                userNameTextView.setText(userName + "'s order:");
+
+                if(isAccepted){
+                    help.setText("ALREADY TAKEN");
+                    help.setEnabled(true);
+                }
+                for(CartPosition position : cartPositions){
+                    addPosition(position.product.name,position.quantity);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     public void addPosition(String productName, double qty){
@@ -75,7 +134,7 @@ public class SomeonesOrder extends AppCompatActivity implements View.OnClickList
     }
     @Override
     public void onClick(View v) {
-        cart.ordersRepo.findOrder(userNr).acceptOrder();
+        //cart.ordersRepo.findOrder(userId).acceptOrder();
         finish();
         overridePendingTransition(0, 0);
         startActivity(getIntent());
