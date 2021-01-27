@@ -11,14 +11,26 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class ScreenSlidePageFragment extends Fragment {
 
     Cart cart;
     View myView;
     TextView text;
+    FirebaseAuth mAuth;
+    FirebaseDatabase db;
+    DatabaseReference ref;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -26,18 +38,45 @@ public class ScreenSlidePageFragment extends Fragment {
         myView = inflater.inflate(R.layout.fragment_screen_slide_page, container, false);
         cart = (Cart) getContext().getApplicationContext();
         text = (TextView) myView.findViewById(R.id.status);
-        for(CartPosition position : cart.cartPositions){
-            addPosition(position.product.name , position.quantity);
-        }
 
-        //for now
-        if(true){
-            text.setText("Joao \n 111222333");
-        }
+
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseDatabase.getInstance();
+
+
+        ref = db.getReference();
+
+
+        ref.child("Users").child(mAuth.getCurrentUser().getUid()).child("Offers").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Boolean isAccepted = Boolean.parseBoolean(snapshot.child("isAccepted").getValue().toString());
+                System.out.println(snapshot.child("isAccepted").getValue().toString());
+                if (isAccepted){
+                    text.setText("Accepted");
+                    text.setBackgroundResource(R.drawable.cart_button);
+                    text.setTextColor(Color.WHITE);
+                }
+
+                for (DataSnapshot productId : snapshot.child("Cart").getChildren()) {
+                    String productName = productId.child("product").child("name").getValue().toString();
+                    Double productQuantity = Double.parseDouble(productId.child("quantity").getValue().toString());
+
+                    addPosition(productName, productQuantity);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+        });
+
         return myView;
     }
 
-    public void addPosition(String productName,double qty){
+    public void addPosition(String productName, double qty){
         TextView position = new TextView(this.getActivity());
         TextView qtyText = new TextView(this.getActivity());
 

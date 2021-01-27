@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -33,6 +34,7 @@ public class SomeonesOrder extends AppCompatActivity implements View.OnClickList
     List<CartPosition> cartPositions;
     FirebaseAuth mAuth;
     FirebaseDatabase db;
+    DatabaseReference ref;
     Boolean isAccepted = false;
 
     @Override
@@ -50,7 +52,7 @@ public class SomeonesOrder extends AppCompatActivity implements View.OnClickList
         db = FirebaseDatabase.getInstance();
 
 
-        DatabaseReference ref = db.getReference();
+        ref = db.getReference();
 
         System.out.println(userId);
         ref.child("Users").addValueEventListener(new ValueEventListener() {
@@ -134,7 +136,9 @@ public class SomeonesOrder extends AppCompatActivity implements View.OnClickList
     }
     @Override
     public void onClick(View v) {
-        //cart.ordersRepo.findOrder(userId).acceptOrder();
+        ref.child("Users").child(userId).child("Offers").child("isAccepted").setValue(true);
+        ref.child("Users").child(userId).child("Offers").child("acceptedUserId").setValue(mAuth.getCurrentUser().getUid());
+        Toast.makeText(SomeonesOrder.this, "Order accepted", Toast.LENGTH_LONG).show();
         finish();
         overridePendingTransition(0, 0);
         startActivity(getIntent());
