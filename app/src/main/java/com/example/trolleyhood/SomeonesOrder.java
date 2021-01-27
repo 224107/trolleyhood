@@ -54,7 +54,6 @@ public class SomeonesOrder extends AppCompatActivity implements View.OnClickList
 
         ref = db.getReference();
 
-        System.out.println(userId);
         ref.child("Users").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -66,7 +65,6 @@ public class SomeonesOrder extends AppCompatActivity implements View.OnClickList
                         isAccepted = Boolean.parseBoolean(userIdDb.child("Offers").child("isAccepted").getValue().toString());
                         //User
                         userName = userIdDb.child("name").getValue().toString();
-                        System.out.println(userName);
                         //Order
                         for (DataSnapshot productId : cartDb.getChildren()) {
                             String productCategory = productId.child("product").child("category").getValue().toString();
@@ -74,10 +72,6 @@ public class SomeonesOrder extends AppCompatActivity implements View.OnClickList
                             String productName = productId.child("product").child("name").getValue().toString();
 
                             Double productQuantity = Double.parseDouble(productId.child("quantity").getValue().toString());
-                            System.out.println(productCategory);
-                            System.out.println(productName);
-                            System.out.println(productQuantity);
-                            System.out.println(productIsCountable);
                             Product product = new Product(ProductCategory.parseCategory(productCategory), productName, productIsCountable);
                             CartPosition cartPosition = new CartPosition(product, productQuantity);
                             cartPositions.add(cartPosition);
