@@ -47,10 +47,7 @@ public class ScreenSlidePageFragment2 extends Fragment implements View.OnClickLi
 
                         String aUser = userIdDb.child("Offers").child("acceptedUserId").getValue().toString();
                         String user = mAuth.getCurrentUser().getUid();
-                        System.out.println(aUser);
-                        System.out.println(user);
                         if (userIdDb.child("Offers").child("acceptedUserId").getValue().equals(mAuth.getCurrentUser().getUid())) {
-                            System.out.println("JEST GIT12231");
                             String name = userIdDb.child("name").getValue().toString();
                             addPosition(name);
                         }
