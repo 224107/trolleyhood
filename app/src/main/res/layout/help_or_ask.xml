@@ -8,74 +8,83 @@
     android:background="@color/c3">
 
     <Button
+        android:id="@+id/imageViewHelp"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/my_button_bg"
+        android:text="@string/help_your_neighbours"
+        android:textColor="@color/c2"
+        android:textSize="24sp"
+        app:cornerRadius="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/c2" />
+
+    <Button
         android:id="@+id/buttonSettings"
         android:layout_width="300dp"
-        android:layout_height="70dp"
-        android:layout_marginBottom="32dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/my_button_bg"
         android:text="@string/settings"
         android:textColor="@color/c2"
         android:textSize="24sp"
         app:cornerRadius="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonOrdersToDo"
         app:strokeColor="@color/c2" />
 
     <Button
         android:id="@+id/buttonMyOrder"
         android:layout_width="300dp"
-        android:layout_height="70dp"
-        android:layout_marginBottom="16dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/my_button_bg"
         android:text="@string/my_order"
         android:textColor="@color/c2"
         android:textSize="24sp"
         app:cornerRadius="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonOrdersToDo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewAsk"
+        app:strokeColor="@color/c2" />
+
+    <Button
+        android:id="@+id/imageViewAsk"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/my_button_bg"
+        android:text="@string/ask_for_shopping"
+        android:textColor="@color/c2"
+        android:textSize="24sp"
+        app:cornerRadius="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewHelp"
         app:strokeColor="@color/c2" />
 
     <Button
         android:id="@+id/buttonOrdersToDo"
         android:layout_width="300dp"
-        android:layout_height="70dp"
-        android:layout_marginBottom="16dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/my_button_bg"
         android:text="@string/takenorders"
         android:textColor="@color/c2"
         android:textSize="24sp"
         app:cornerRadius="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonSettings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonMyOrder"
         app:strokeColor="@color/c2" />
 
-    <ImageView
-        android:id="@+id/imageViewHelp"
-        android:layout_width="200dp"
-        android:layout_height="204dp"
-        android:layout_marginTop="16dp"
-        android:contentDescription="@string/help_your_neighbours"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/help" />
-
-    <ImageView
-        android:id="@+id/imageViewAsk"
-        android:layout_width="200dp"
-        android:layout_height="214dp"
-        android:layout_marginTop="4dp"
-        android:contentDescription="@string/ask_for_shopping"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewHelp"
-        app:srcCompat="@drawable/ask" />
 </androidx.constraintlayout.widget.ConstraintLayout>

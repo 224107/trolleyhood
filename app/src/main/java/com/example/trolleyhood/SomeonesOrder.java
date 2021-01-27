@@ -134,9 +134,10 @@ public class SomeonesOrder extends AppCompatActivity implements View.OnClickList
         ref.child("Users").child(userId).child("Offers").child("isAccepted").setValue(true);
         ref.child("Users").child(userId).child("Offers").child("acceptedUserId").setValue(mAuth.getCurrentUser().getUid());
         Toast.makeText(SomeonesOrder.this, "Order accepted", Toast.LENGTH_LONG).show();
-        finish();
+        Intent i = new Intent(getApplicationContext(), HelpOrAsk.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(i);
         overridePendingTransition(0, 0);
-        startActivity(getIntent());
         overridePendingTransition(0, 0);
         //cart.ordersRepo.findOrder(userId).acceptOrder();
         help.setEnabled(false);

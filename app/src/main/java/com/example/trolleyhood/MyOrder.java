@@ -50,7 +50,10 @@ public class MyOrder extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 DataSnapshot thisUser = snapshot.child(mAuth.getCurrentUser().getUid()).child("Offers");
-                Boolean isAccepted = Boolean.parseBoolean(thisUser.child("isAccepted").getValue().toString());
+                Boolean isAccepted = false;
+
+                if(thisUser.child("isAccepted").exists())
+                    isAccepted = Boolean.parseBoolean(thisUser.child("isAccepted").getValue().toString());
                 String name = "", phone = "";
                 if (isAccepted){
                     String aUser = thisUser.child("acceptedUserId").getValue().toString();

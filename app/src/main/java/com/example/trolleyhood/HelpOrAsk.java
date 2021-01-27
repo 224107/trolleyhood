@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class HelpOrAsk extends AppCompatActivity implements View.OnClickListener{
-    private ImageView imageViewHelp, imageViewAsk;
+    private Button imageViewHelp, imageViewAsk;
     private Button buttonSettings, buttonMyOrder, buttonOrdersToDo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,8 +19,8 @@ public class HelpOrAsk extends AppCompatActivity implements View.OnClickListener
         buttonSettings = (Button) findViewById(R.id.buttonSettings);
         buttonMyOrder = (Button) findViewById(R.id.buttonMyOrder);
         buttonOrdersToDo = (Button) findViewById(R.id.buttonOrdersToDo);
-        imageViewAsk = (ImageView) findViewById(R.id.imageViewAsk);
-        imageViewHelp = (ImageView) findViewById(R.id.imageViewHelp);
+        imageViewAsk = (Button) findViewById(R.id.imageViewAsk);
+        imageViewHelp = (Button) findViewById(R.id.imageViewHelp);
         buttonSettings.setOnClickListener(this);
         imageViewHelp.setOnClickListener(this);
         imageViewAsk.setOnClickListener(this);
