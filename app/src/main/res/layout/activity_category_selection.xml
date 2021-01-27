@@ -63,6 +63,8 @@
                         android:layout_marginBottom="10dp"
                         android:gravity="bottom|center"
                         android:background="@color/white"
+                        android:textColor="@color/c2"
+                        android:textSize="20dp"
                         android:text="@string/meat">
                     </TextView>
 
@@ -99,6 +101,8 @@
                         android:layout_marginBottom="10dp"
                         android:gravity="bottom|center"
                         android:background="@color/white"
+                        android:textColor="@color/c2"
+                        android:textSize="20dp"
                         android:text="@string/sweet">
                     </TextView>
                 </LinearLayout>
@@ -133,6 +137,8 @@
                         android:layout_marginBottom="10dp"
                         android:gravity="bottom|center"
                         android:background="@color/white"
+                        android:textColor="@color/c2"
+                        android:textSize="20dp"
                         android:text="@string/bread">
                     </TextView>
                 </LinearLayout>
@@ -167,6 +173,8 @@
                         android:layout_marginBottom="10dp"
                         android:gravity="bottom|center"
                         android:background="@color/white"
+                        android:textColor="@color/c2"
+                        android:textSize="20dp"
                         android:text="@string/fish">
                     </TextView>
 
@@ -202,6 +210,8 @@
                         android:layout_marginBottom="10dp"
                         android:gravity="bottom|center"
                         android:background="@color/white"
+                        android:textColor="@color/c2"
+                        android:textSize="20dp"
                         android:text="@string/drinks">
                     </TextView>
 
@@ -236,6 +246,8 @@
                         android:layout_marginBottom="10dp"
                         android:gravity="bottom|center"
                         android:background="@color/white"
+                        android:textColor="@color/c2"
+                        android:textSize="20dp"
                         android:text="@string/cosmetics">
                     </TextView>
                 </LinearLayout>
@@ -269,6 +281,8 @@
                         android:layout_marginBottom="10dp"
                         android:gravity="bottom|center"
                         android:background="@color/white"
+                        android:textColor="@color/c2"
+                        android:textSize="20dp"
                         android:text="@string/dry">
                     </TextView>
 
@@ -304,6 +318,8 @@
                         android:layout_marginBottom="10dp"
                         android:gravity="bottom|center"
                         android:background="@color/white"
+                        android:textColor="@color/c2"
+                        android:textSize="20dp"
                         android:text="@string/fruits">
                     </TextView>
 
@@ -338,6 +354,8 @@
                         android:layout_marginBottom="10dp"
                         android:gravity="bottom|center"
                         android:background="@color/white"
+                        android:textColor="@color/c2"
+                        android:textSize="20dp"
                         android:text="@string/dairy">
                     </TextView>
 
@@ -373,6 +391,8 @@
                         android:layout_marginBottom="10dp"
                         android:gravity="bottom|center"
                         android:background="@color/white"
+                        android:textColor="@color/c2"
+                        android:textSize="20dp"
                         android:text="@string/vegetables">
                     </TextView>
                 </LinearLayout>

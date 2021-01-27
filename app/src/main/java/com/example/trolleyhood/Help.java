@@ -102,10 +102,7 @@ public class Help extends AppCompatActivity implements View.OnClickListener {
 
     public void addPosition(User user, double dist){
         TextView position = new TextView(this);
-        ImageView icon = new ImageView(this);
         TextView distance = new TextView(this);
-        icon.setImageResource(R.drawable.user);
-
         position.setText(user.name);
         position.setGravity(Gravity.CENTER);
         position.setTextSize(25);
@@ -121,22 +118,20 @@ public class Help extends AppCompatActivity implements View.OnClickListener {
             distance.setText("NA");
         }
 
-        icon.setBackgroundResource(R.drawable.my_button_bg);
         TableLayout ll = (TableLayout) findViewById(R.id.table_layout);
         TableRow tr=new TableRow(this);
         tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
 
         TableRow.LayoutParams params = new TableRow.LayoutParams(
-                500 , 250);
-        params.setMargins(10, 20, 10, 0);
+                620 , 200);
+        params.setMargins(30, 20, 10, 0);
         TableRow.LayoutParams params2 = new TableRow.LayoutParams(
-                250 , 250);
-        params2.setMargins(10, 20, 10, 0);
+                300 , 200);
+        params2.setMargins(30, 20, 10, 0);
+        params.setMarginStart(65);
         position.setLayoutParams(params);
-        icon.setLayoutParams(params2);
         distance.setLayoutParams(params2);
         tr.setTag(user.id);
-        tr.addView(icon);
         tr.addView(position);
         tr.addView(distance);
         tr.setOnClickListener(this::onClick);

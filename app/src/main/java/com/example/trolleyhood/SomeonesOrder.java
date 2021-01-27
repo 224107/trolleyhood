@@ -123,11 +123,12 @@ public class SomeonesOrder extends AppCompatActivity implements View.OnClickList
         tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
 
         TableRow.LayoutParams params = new TableRow.LayoutParams(
-                750 , 250);
-        params.setMargins(10, 20, 10, 0);
+                620 , 200);
+        params.setMargins(30, 20, 10, 0);
         TableRow.LayoutParams params2 = new TableRow.LayoutParams(
-                250 , 250);
-        params2.setMargins(25,20, 10, 0);
+                300 , 200);
+        params2.setMargins(30, 20, 10, 0);
+        params.setMarginStart(65);
         position.setLayoutParams(params);
         qtyText.setLayoutParams(params2);
         tr.addView(position);
@@ -143,5 +144,8 @@ public class SomeonesOrder extends AppCompatActivity implements View.OnClickList
         overridePendingTransition(0, 0);
         startActivity(getIntent());
         overridePendingTransition(0, 0);
+        //cart.ordersRepo.findOrder(userId).acceptOrder();
+        help.setEnabled(false);
+        help.setText("ORDER TAKEN");
     }
 }
