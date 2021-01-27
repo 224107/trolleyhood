@@ -1,18 +1,17 @@
 package com.example.trolleyhood;
 
+
+
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -21,7 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class ScreenSlidePageFragment2 extends Fragment implements View.OnClickListener {
+public class OrdersToDo extends AppCompatActivity implements View.OnClickListener{
 
     View myView;
     FirebaseAuth mAuth;
@@ -29,10 +28,10 @@ public class ScreenSlidePageFragment2 extends Fragment implements View.OnClickLi
     DatabaseReference ref;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
 
-        myView = inflater.inflate(R.layout.fragment_screen_slide_page2, container, false);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_screen_slide_page2);
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance();
@@ -65,18 +64,13 @@ public class ScreenSlidePageFragment2 extends Fragment implements View.OnClickLi
             }
         });
 
-        return myView;
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
 
 
     public void addPosition(String name){
-        TextView position = new TextView(this.getContext());
-        ImageView icon = new ImageView(this.getContext());
+        TextView position = new TextView(this);
+        ImageView icon = new ImageView(this);
         icon.setImageResource(R.drawable.check);
 
         position.setText(name);
@@ -84,8 +78,8 @@ public class ScreenSlidePageFragment2 extends Fragment implements View.OnClickLi
         position.setTextSize(25);
         position.setTextColor(Color.parseColor("#25619B"));
         position.setBackgroundResource(R.drawable.my_button_bg);
-        TableLayout ll = (TableLayout) myView.findViewById(R.id.table_layout);
-        TableRow tr=new TableRow(this.getContext());
+        TableLayout ll = (TableLayout) findViewById(R.id.table_layout);
+        TableRow tr=new TableRow(this);
         tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
 
         TableRow.LayoutParams params = new TableRow.LayoutParams(

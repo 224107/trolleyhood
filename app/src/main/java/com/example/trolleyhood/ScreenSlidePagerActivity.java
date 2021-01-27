@@ -72,4 +72,10 @@ public class ScreenSlidePagerActivity extends FragmentActivity {
             return NUM_PAGES;
         }
     }
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+    }
 }

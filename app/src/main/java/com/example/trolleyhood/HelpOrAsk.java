@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class HelpOrAsk extends AppCompatActivity implements View.OnClickListener{
     private ImageView imageViewHelp, imageViewAsk;
-    private Button buttonSettings, buttonMyOrder;
+    private Button buttonSettings, buttonMyOrder, buttonOrdersToDo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,12 +18,14 @@ public class HelpOrAsk extends AppCompatActivity implements View.OnClickListener
 
         buttonSettings = (Button) findViewById(R.id.buttonSettings);
         buttonMyOrder = (Button) findViewById(R.id.buttonMyOrder);
+        buttonOrdersToDo = (Button) findViewById(R.id.buttonOrdersToDo);
         imageViewAsk = (ImageView) findViewById(R.id.imageViewAsk);
         imageViewHelp = (ImageView) findViewById(R.id.imageViewHelp);
         buttonSettings.setOnClickListener(this);
         imageViewHelp.setOnClickListener(this);
         imageViewAsk.setOnClickListener(this);
         buttonMyOrder.setOnClickListener(this);
+        buttonOrdersToDo.setOnClickListener(this);
         buttonSettings.setBackgroundResource(R.drawable.my_button_bg);
         buttonMyOrder.setBackgroundResource(R.drawable.my_button_bg);
     }
@@ -41,7 +43,10 @@ public class HelpOrAsk extends AppCompatActivity implements View.OnClickListener
                 startActivity(new Intent(getApplicationContext(), Help.class));
                 break;
             case R.id.buttonMyOrder:
-                startActivity(new Intent(getApplicationContext(), ScreenSlidePagerActivity.class));
+                startActivity(new Intent(getApplicationContext(), MyOrder.class));
+                break;
+                case R.id.buttonOrdersToDo:
+                startActivity(new Intent(getApplicationContext(), OrdersToDo.class));
                 break;
         }
     }

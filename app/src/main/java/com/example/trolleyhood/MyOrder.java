@@ -22,22 +22,21 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class ScreenSlidePageFragment extends Fragment {
+public class MyOrder extends AppCompatActivity {
 
     Cart cart;
-    View myView;
     TextView text;
     FirebaseAuth mAuth;
     FirebaseDatabase db;
     DatabaseReference ref;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
 
-        myView = inflater.inflate(R.layout.fragment_screen_slide_page, container, false);
-        cart = (Cart) getContext().getApplicationContext();
-        text = (TextView) myView.findViewById(R.id.status);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_screen_slide_page);
+        cart = (Cart) getApplicationContext();
+        text = (TextView) findViewById(R.id.status);
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -73,17 +72,12 @@ public class ScreenSlidePageFragment extends Fragment {
 
         });
 
-        return myView;
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
 
     public void addPosition(String productName, double qty){
-        TextView position = new TextView(this.getContext());
-        TextView qtyText = new TextView(this.getContext());
+        TextView position = new TextView(this);
+        TextView qtyText = new TextView(this);
 
         position.setText(productName);
         qtyText.setText(String.valueOf(qty));
@@ -95,8 +89,8 @@ public class ScreenSlidePageFragment extends Fragment {
         qtyText.setTextColor(Color.parseColor("#25619B"));
         position.setBackgroundResource(R.drawable.my_button_bg);
         qtyText.setBackgroundResource(R.drawable.my_button_bg);
-        TableLayout ll = (TableLayout) myView.findViewById(R.id.table_layout); //getView().findViewById(R.id.table_layout);
-        TableRow tr=new TableRow(this.getContext());
+        TableLayout ll = (TableLayout) findViewById(R.id.table_layout); //getView().findViewById(R.id.table_layout);
+        TableRow tr=new TableRow(this);
         tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
 
         TableRow.LayoutParams params = new TableRow.LayoutParams(
