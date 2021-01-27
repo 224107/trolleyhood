@@ -17,7 +17,7 @@ public class SetQty extends AppCompatActivity implements View.OnClickListener {
     private EditText editQty;
     ProductList list = new ProductList();
     String passedProduct;
-    double qty = 0;
+    double qty = 0.0;
     ImageView image;
 
     @Override
@@ -59,7 +59,7 @@ public class SetQty extends AppCompatActivity implements View.OnClickListener {
             editQty.requestFocus();
             return;
         }
-        qty = Double.parseDouble(qtyString);
+        qty = Double.parseDouble(qtyString) + 0.0;
         Cart cart = (Cart) getApplicationContext();
         cart.addPosition(new CartPosition(list.getByName(passedProduct),qty));
         Toast.makeText(SetQty.this, passedProduct + " added to cart!", Toast.LENGTH_LONG).show();

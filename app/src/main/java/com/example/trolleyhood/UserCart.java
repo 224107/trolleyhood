@@ -23,6 +23,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class UserCart extends AppCompatActivity implements View.OnClickListener {
 
     Cart cart;
@@ -43,7 +46,7 @@ public class UserCart extends AppCompatActivity implements View.OnClickListener 
         category = (TextView) findViewById(R.id.category);
         category.setBackgroundResource(R.drawable.cart_button);
     }
-    public void addPosition(String productName,double qty){
+    public void addPosition(String productName, double qty){
         TextView position = new TextView(this);
         TextView qtyText = new TextView(this);
         ImageView delete = new ImageView(this);
@@ -110,8 +113,11 @@ public class UserCart extends AppCompatActivity implements View.OnClickListener 
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Offers");
         Integer i = 0;
 
+        db.child("Cart").removeValue();
         for(CartPosition cp : cart.cartPositions){
-            db.child("Cart").child("product" + i.toString()).setValue(cp);
+            db.child("Cart").child(i.toString()).setValue(cp);
+            String qty = String.format("%.2f", cp.quantity);
+            db.child("Cart").child(i.toString()).child("quantity").setValue(qty);
             i++;
         }
         db.child("isAccepted").setValue(false);

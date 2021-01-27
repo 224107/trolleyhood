@@ -33,23 +33,18 @@ public class Help extends AppCompatActivity implements View.OnClickListener {
     Cart cart;
     FirebaseAuth mAuth;
     FirebaseDatabase db;
-    List<Order> orders;
-    List<User> users;
-    Integer i;
+    Double lat1, lng1, lat2, lng2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.help);
         cart = (Cart) getApplicationContext();
-        for(Order order : cart.ordersRepo.allOrders){
-          addPosition(order.user);
-        }
+
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance();
-        orders = new ArrayList<>();
-        users = new ArrayList<>();
+
 
         DatabaseReference ref = db.getReference();
         final String userId = mAuth.getCurrentUser().getUid();
@@ -58,31 +53,43 @@ public class Help extends AppCompatActivity implements View.OnClickListener {
         ref.child("Users").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot userIdDb : snapshot.getChildren()) {
-                    System.out.println(userIdDb.getKey());
-                    if(!userIdDb.getKey().equals(userId))
-                        i = 0;
-                        DataSnapshot cartDb = userIdDb.child("Offers").child("Cart");
-
-                        if(cartDb.child("isAccepted").getValue().toString().equals("false")) {
-                        String childProductId = "product" + i.toString();
-                        String name = userIdDb.child("name").getValue().toString();
-                        String email = userIdDb.child("email").getValue().toString();
-                        String phone = userIdDb.child("phone").getValue().toString();
-
-                        for(DataSnapshot product : cartDb.getChildren()){
-                            continue;
-                        }
-                        String productCategory = cartDb.child(childProductId).child("product").child("category").getValue().toString();
-                        String productIsCountable = cartDb.child(childProductId).child("product").child("isCountable").getValue().toString();
-                        String productName = cartDb.child(childProductId).child("product").child("name").getValue().toString();
-                        String productQuantity = cartDb.child(childProductId).child("Quantity").getValue().toString();
-
-                        i++;
+                for (DataSnapshot userIdDb : snapshot.getChildren()) {
+                    if (userIdDb.getKey().equals(userId)) {
+                        if (userIdDb.child("Location").child("latLng").exists()) {
+                            lat2 = Double.parseDouble(userIdDb.child("Location").child("latLng").child("latitude").getValue().toString());
+                            lng2 = Double.parseDouble(userIdDb.child("Location").child("latLng").child("longitude").getValue().toString());
                         }
                     }
-
                 }
+                for (DataSnapshot userIdDb : snapshot.getChildren()) {
+                    if (!userIdDb.getKey().equals(userId)) {
+                        if(userIdDb.child("Offers").exists()){
+                            Boolean isAccepted = Boolean.parseBoolean(userIdDb.child("Offers").child("isAccepted").getValue().toString());
+                            if (!isAccepted) {
+                                DataSnapshot cartDb = userIdDb.child("Offers").child("Cart");
+
+                                //User
+                                String name = userIdDb.child("name").getValue().toString();
+                                String email = userIdDb.child("email").getValue().toString();
+                                String phone = userIdDb.child("phone").getValue().toString();
+
+                                User user = new User(name, email, phone);
+                                user.id = userIdDb.getKey();
+                                double dist = 0.0;
+                                //Location
+                                if (userIdDb.child("Location").child("latLng").exists()){
+                                    lat1 = Double.parseDouble(userIdDb.child("Location").child("latLng").child("latitude").getValue().toString());
+                                    lng1 = Double.parseDouble(userIdDb.child("Location").child("latLng").child("longitude").getValue().toString());
+                                    dist = distance(lat1, lat2, lng1, lng2, 0.0, 0.0);
+                                }
+                                addPosition(user, dist);
+
+                            }
+                        }
+                    }
+                }
+
+            }
 
 
             @Override
@@ -91,10 +98,9 @@ public class Help extends AppCompatActivity implements View.OnClickListener {
             }
         });
 
-        //db.getReference("Offers").child()
     }
 
-    public void addPosition(User user){
+    public void addPosition(User user, double dist){
         TextView position = new TextView(this);
         ImageView icon = new ImageView(this);
         TextView distance = new TextView(this);
@@ -105,13 +111,16 @@ public class Help extends AppCompatActivity implements View.OnClickListener {
         position.setTextSize(25);
         position.setTextColor(Color.parseColor("#25619B"));
         position.setBackgroundResource(R.drawable.my_button_bg);
-        //todo: distance have to be calculated
-        double distanceCal = 12.5d;
         distance.setGravity(Gravity.CENTER);
         distance.setTextSize(25);
         distance.setTextColor(Color.parseColor("#25619B"));
         distance.setBackgroundResource(R.drawable.my_button_bg);
-        distance.setText(String.valueOf(distanceCal) + " m");
+        if( dist != 0.0){
+            distance.setText(String.valueOf((int)dist) + " m");
+        } else {
+            distance.setText("NA");
+        }
+
         icon.setBackgroundResource(R.drawable.my_button_bg);
         TableLayout ll = (TableLayout) findViewById(R.id.table_layout);
         TableRow tr=new TableRow(this);
@@ -126,7 +135,7 @@ public class Help extends AppCompatActivity implements View.OnClickListener {
         position.setLayoutParams(params);
         icon.setLayoutParams(params2);
         distance.setLayoutParams(params2);
-        tr.setTag(user.phone);
+        tr.setTag(user.id);
         tr.addView(icon);
         tr.addView(position);
         tr.addView(distance);
@@ -139,7 +148,36 @@ public class Help extends AppCompatActivity implements View.OnClickListener {
         Intent intent = new Intent(getApplicationContext(), SomeonesOrder.class);
 
                 String userNr = v.getTag().toString();
-                intent.putExtra("userNr", userNr);
+                intent.putExtra("userId", userNr);
                 startActivity(intent);
+    }
+
+    /**
+     * Calculate distance between two points in latitude and longitude taking
+     * into account height difference. If you are not interested in height
+     * difference pass 0.0. Uses Haversine method as its base.
+     *
+     * lat1, lon1 Start point lat2, lon2 End point el1 Start altitude in meters
+     * el2 End altitude in meters
+     * @returns Distance in Meters
+     */
+    public static double distance(double lat1, double lat2, double lon1,
+                                  double lon2, double el1, double el2) {
+
+        final int R = 6371; // Radius of the earth
+
+        double latDistance = Math.toRadians(lat2 - lat1);
+        double lonDistance = Math.toRadians(lon2 - lon1);
+        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+                + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
+                * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        double distance = R * c * 1000; // convert to meters
+
+        double height = el1 - el2;
+
+        distance = Math.pow(distance, 2) + Math.pow(height, 2);
+
+        return Math.sqrt(distance);
     }
 }

@@ -69,6 +69,7 @@ public class SetLocation extends FragmentActivity implements OnMapReadyCallback,
         switch(v.getId()){
             case R.id.buttonConfirmLocation:
                 confirmLocation();
+                startActivity(new Intent(getApplicationContext(), HelpOrAsk.class));
                 break;
             case R.id.buttonSearchAddress:
                 searchAddress();
