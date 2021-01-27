@@ -41,7 +41,7 @@ public class HelpOrAsk extends AppCompatActivity implements View.OnClickListener
                 startActivity(new Intent(getApplicationContext(), Help.class));
                 break;
             case R.id.buttonMyOrder:
-                startActivity(new Intent(getApplicationContext(), Help.class));
+                startActivity(new Intent(getApplicationContext(), ScreenSlidePagerActivity.class));
                 break;
         }
     }

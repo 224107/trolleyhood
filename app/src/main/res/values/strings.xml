@@ -49,6 +49,8 @@
     <string name="takeorder">take the order</string>
     <string name="empty"></string>
     <string name="my_order">MY ORDER</string>
+    <string name="takenorders">ORDERS TO DO</string>
+    <string name="waiting">WAITING FOR HELP</string>
 
     <!--
     This string is used for square devices and overridden by hello_world in

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/c3"
+    >
+
+    <LinearLayout
+        android:id="@+id/uppertitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/cart"
+            android:layout_width="360dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/cart_button"
+            android:gravity="center"
+            android:text="@string/takenorders"
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            android:translationX="26dp"></TextView>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/uppertitle">
+        <TableLayout
+            android:id="@+id/table_layout"
+            android:layout_height="wrap_content" android:layout_width="fill_parent" >
+
+        </TableLayout>
+    </ScrollView>
+
+</RelativeLayout>
