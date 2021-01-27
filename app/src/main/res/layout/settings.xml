@@ -16,13 +16,14 @@
         android:text="@string/change_name"
         android:textColor="@color/c2"
         android:textSize="24sp"
+        android:background="@drawable/my_button_bg"
         app:cornerRadius="0dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonChangeAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:strokeColor="@color/c2"
-        app:strokeWidth="3dp" />
+        />
 
     <Button
         android:id="@+id/buttonLogOut"
@@ -33,13 +34,14 @@
         android:text="@string/log_out"
         android:textColor="@color/c2"
         android:textSize="24sp"
+        android:background="@drawable/my_button_bg"
         app:cornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:strokeColor="@color/c2"
-        app:strokeWidth="3dp" />
+        />
 
     <Button
         android:id="@+id/buttonChangePhone"
@@ -50,12 +52,13 @@
         android:text="@string/change_phone"
         android:textColor="@color/c2"
         android:textSize="24sp"
+        android:background="@drawable/my_button_bg"
         app:cornerRadius="0dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonLogOut"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:strokeColor="@color/c2"
-        app:strokeWidth="3dp" />
+       />
 
     <Button
         android:id="@+id/buttonChangeAddress"
@@ -66,13 +69,14 @@
         android:text="@string/change_address"
         android:textColor="@color/c2"
         android:textSize="24sp"
+        android:background="@drawable/my_button_bg"
         app:cornerRadius="0dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonChangePhone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:strokeColor="@color/c2"
-        app:strokeWidth="3dp" />
+         />
 
     <TextView
         android:id="@+id/textViewNumber"

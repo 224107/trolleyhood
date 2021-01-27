@@ -7,50 +7,64 @@
     android:background="@color/c3"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/imgCart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:background="@color/c3"
+        android:backgroundTint="@color/c3"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/cart" />
+
     <Button
         android:id="@+id/btnCreateAccount"
         android:layout_width="300dp"
         android:layout_height="80dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/my_button_bg"
         android:backgroundTint="@color/white"
         android:text="@string/create_acc"
         android:textColor="@color/c2"
         android:textSize="24sp"
         app:cornerRadius="0dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.468"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSignIn"
-        app:strokeColor="@color/c2"
-        app:strokeWidth="3dp" />
-
-    <ImageView
-        android:id="@+id/imgCart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@color/c3"
-        android:backgroundTint="@color/c3"
-        android:contentDescription="@string/app_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.592"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/cart" />
+        app:strokeColor="@color/c2" />
 
     <Button
         android:id="@+id/btnSignIn"
         android:layout_width="300dp"
         android:layout_height="80dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/my_button_bg"
         android:backgroundTint="@color/white"
         android:text="@string/sing_in"
         android:textColor="@color/c2"
         android:textSize="24sp"
         app:cornerRadius="0dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.477"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgCart"
-        app:strokeColor="@color/c2"
-        app:strokeWidth="3dp" />
+        app:strokeColor="@color/c2" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="trolleyhood"
+        android:textColor="@color/c2"
+        android:textSize="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/imgCart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>
