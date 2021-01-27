@@ -46,18 +46,28 @@ public class MyOrder extends AppCompatActivity {
         ref = db.getReference();
 
 
-        ref.child("Users").child(mAuth.getCurrentUser().getUid()).child("Offers").addValueEventListener(new ValueEventListener() {
+        ref.child("Users").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Boolean isAccepted = Boolean.parseBoolean(snapshot.child("isAccepted").getValue().toString());
-                System.out.println(snapshot.child("isAccepted").getValue().toString());
+                DataSnapshot thisUser = snapshot.child(mAuth.getCurrentUser().getUid()).child("Offers");
+                Boolean isAccepted = Boolean.parseBoolean(thisUser.child("isAccepted").getValue().toString());
+                String name = "", phone = "";
                 if (isAccepted){
-                    text.setText("Accepted");
+                    String aUser = thisUser.child("acceptedUserId").getValue().toString();
+                    for (DataSnapshot userIdDb : snapshot.getChildren()) {
+                        if ( userIdDb.getKey().equals(aUser)) {
+                            name = userIdDb.child("name").getValue().toString();
+                            phone = userIdDb.child("phone").getValue().toString();
+                        }
+                    }
+
+                    text.setText("Accepted by: " + name + "\nPhone: " + phone);
+                    text.setTextSize(24);
                     text.setBackgroundResource(R.drawable.cart_button);
                     text.setTextColor(Color.WHITE);
                 }
 
-                for (DataSnapshot productId : snapshot.child("Cart").getChildren()) {
+                for (DataSnapshot productId : thisUser.child("Cart").getChildren()) {
                     String productName = productId.child("product").child("name").getValue().toString();
                     Double productQuantity = Double.parseDouble(productId.child("quantity").getValue().toString());
 

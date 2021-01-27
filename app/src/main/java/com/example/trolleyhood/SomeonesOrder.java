@@ -83,7 +83,7 @@ public class SomeonesOrder extends AppCompatActivity implements View.OnClickList
 
                 if(isAccepted){
                     help.setText("ALREADY TAKEN");
-                    help.setEnabled(true);
+                    help.setEnabled(false);
                 }
                 for(CartPosition position : cartPositions){
                     addPosition(position.product.name,position.quantity);

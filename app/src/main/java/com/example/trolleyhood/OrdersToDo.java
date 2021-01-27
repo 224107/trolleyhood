@@ -2,6 +2,7 @@ package com.example.trolleyhood;
 
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -46,12 +47,10 @@ public class OrdersToDo extends AppCompatActivity implements View.OnClickListene
 
                         String aUser = userIdDb.child("Offers").child("acceptedUserId").getValue().toString();
                         String user = mAuth.getCurrentUser().getUid();
-                        System.out.println(aUser);
-                        System.out.println(user);
                         if (userIdDb.child("Offers").child("acceptedUserId").getValue().equals(mAuth.getCurrentUser().getUid())) {
-                            System.out.println("JEST GIT12231");
                             String name = userIdDb.child("name").getValue().toString();
-                            addPosition(name);
+                            String id = userIdDb.getKey();
+                            addPosition(name, id);
                         }
                     }
 
@@ -68,7 +67,7 @@ public class OrdersToDo extends AppCompatActivity implements View.OnClickListene
 
 
 
-    public void addPosition(String name){
+    public void addPosition(String name, String id){
         TextView position = new TextView(this);
         ImageView icon = new ImageView(this);
         icon.setImageResource(R.drawable.check);
@@ -93,8 +92,8 @@ public class OrdersToDo extends AppCompatActivity implements View.OnClickListene
         position.setOnClickListener(this::onClick);
         icon.setLayoutParams(params2);
         icon.setOnClickListener(this::onClick);
-        //position.setTag(user.phone);
-        //icon.setTag(user.phone);
+        position.setTag(id);
+        icon.setTag(id);
         tr.addView(icon);
         tr.addView(position);
         ll.addView(tr, new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
@@ -102,6 +101,10 @@ public class OrdersToDo extends AppCompatActivity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
+        Intent intent = new Intent(getApplicationContext(), SomeonesOrder.class);
 
+        String userNr = v.getTag().toString();
+        intent.putExtra("userId", userNr);
+        startActivity(intent);
     }
 }
