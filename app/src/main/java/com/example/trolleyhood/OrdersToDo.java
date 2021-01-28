@@ -69,8 +69,7 @@ public class OrdersToDo extends AppCompatActivity implements View.OnClickListene
 
     public void addPosition(String name, String id){
         TextView position = new TextView(this);
-        ImageView icon = new ImageView(this);
-        icon.setImageResource(R.drawable.check);
+
 
         position.setText(name);
         position.setGravity(Gravity.CENTER);
@@ -82,19 +81,12 @@ public class OrdersToDo extends AppCompatActivity implements View.OnClickListene
         tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
 
         TableRow.LayoutParams params = new TableRow.LayoutParams(
-                720 , 200);
+                950 , 200);
         params.setMargins(30, 20, 10, 0);
-        TableRow.LayoutParams params2 = new TableRow.LayoutParams(
-                200 , 200);
-        params2.setMargins(10, 20, 10, 0);
-        params2.setMarginStart(65);
+        params.setMarginStart(65);
         position.setLayoutParams(params);
         position.setOnClickListener(this::onClick);
-        icon.setLayoutParams(params2);
-        icon.setOnClickListener(this::onClick);
         position.setTag(id);
-        icon.setTag(id);
-        tr.addView(icon);
         tr.addView(position);
         ll.addView(tr, new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
     }

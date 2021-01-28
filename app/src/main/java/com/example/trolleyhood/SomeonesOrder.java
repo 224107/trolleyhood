@@ -82,8 +82,7 @@ public class SomeonesOrder extends AppCompatActivity implements View.OnClickList
                 userNameTextView.setText(userName + "'s order:");
 
                 if(isAccepted){
-                    help.setText("ALREADY TAKEN");
-                    help.setEnabled(false);
+                    help.setText("OREDER DONE?");
                 }
                 for(CartPosition position : cartPositions){
                     addPosition(position.product.name,position.quantity);
@@ -131,16 +130,16 @@ public class SomeonesOrder extends AppCompatActivity implements View.OnClickList
     }
     @Override
     public void onClick(View v) {
-        ref.child("Users").child(userId).child("Offers").child("isAccepted").setValue(true);
-        ref.child("Users").child(userId).child("Offers").child("acceptedUserId").setValue(mAuth.getCurrentUser().getUid());
-        Toast.makeText(SomeonesOrder.this, "Order accepted", Toast.LENGTH_LONG).show();
-        Intent i = new Intent(getApplicationContext(), HelpOrAsk.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(i);
-        overridePendingTransition(0, 0);
-        overridePendingTransition(0, 0);
-        //cart.ordersRepo.findOrder(userId).acceptOrder();
-        help.setEnabled(false);
-        help.setText("ORDER TAKEN");
+        if(!isAccepted) {
+            ref.child("Users").child(userId).child("Offers").child("isAccepted").setValue(true);
+            ref.child("Users").child(userId).child("Offers").child("acceptedUserId").setValue(mAuth.getCurrentUser().getUid());
+            Toast.makeText(SomeonesOrder.this, "Order accepted", Toast.LENGTH_LONG).show();
+            Intent i = new Intent(getApplicationContext(), HelpOrAsk.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(i);
+        } else {
+            help.setEnabled(false);
+            help.setText("ORDER DELIVERED");
+        }
     }
 }
