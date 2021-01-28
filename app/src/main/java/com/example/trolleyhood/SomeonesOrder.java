@@ -62,7 +62,8 @@ public class SomeonesOrder extends AppCompatActivity implements View.OnClickList
                         DataSnapshot cartDb = userIdDb.child("Offers").child("Cart");
 
                         //isAccepted = false;
-                        isAccepted = Boolean.parseBoolean(userIdDb.child("Offers").child("isAccepted").getValue().toString());
+                        if ( userIdDb.child("Offers").child("isAccepted").exists())
+                            isAccepted = Boolean.parseBoolean(userIdDb.child("Offers").child("isAccepted").getValue().toString());
                         //User
                         userName = userIdDb.child("name").getValue().toString();
                         //Order
