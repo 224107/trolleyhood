@@ -26,12 +26,13 @@ import com.google.firebase.database.ValueEventListener;
     boolean isButtonChangeNameOn = false, isButtonChangePhoneOn = false;
     private FirebaseAuth mAuth;
     private  FirebaseDatabase db;
+    Cart cart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
-
+        cart = (Cart) getApplicationContext();
         textName = (TextView) findViewById(R.id.textViewName);
         textNumber = (TextView) findViewById(R.id.textViewNumber);
         textStreet = (TextView) findViewById(R.id.textViewStreet);
@@ -101,6 +102,7 @@ import com.google.firebase.database.ValueEventListener;
 
     private void logOut() {
         mAuth.signOut();
+        cart.deleteAll();
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
     }
 

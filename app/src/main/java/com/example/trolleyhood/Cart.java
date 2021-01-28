@@ -29,6 +29,12 @@ public class Cart extends Application {
             }
         }
     }
+    public void deleteAll(){
+        for(CartPosition cp : cartPositions){
+                cartPositions.remove(cp);
+        }
+    }
+
     public List<CartPosition> giveAll(){
         return cartPositions;
     }

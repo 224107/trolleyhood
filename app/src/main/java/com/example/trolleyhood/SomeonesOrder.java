@@ -140,6 +140,10 @@ public class SomeonesOrder extends AppCompatActivity implements View.OnClickList
         } else {
             help.setEnabled(false);
             help.setText("ORDER DELIVERED");
+            ref.child("Users").child(userId).child("Offers").removeValue();
+            Intent i = new Intent(getApplicationContext(), HelpOrAsk.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(i);
         }
     }
 }

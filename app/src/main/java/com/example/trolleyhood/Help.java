@@ -41,7 +41,6 @@ public class Help extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.help);
         cart = (Cart) getApplicationContext();
 
-
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance();
 
